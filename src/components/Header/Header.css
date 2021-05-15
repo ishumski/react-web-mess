@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background-color: #00acee;
+  color: #ffffff;
+  padding: 10px 25px;
+}
+.header a {
+  color: #ffffff;
+}
+.header__logo{
+  font-weight: bolder;
+}
+.header__nav{
+  margin-left: 45px;
+}
+.header__nav a{
+  text-decoration: none;
+  margin-right: 15px;
+}
+.header__wrapper{
+  display: flex; 
+}
+.header__logout a{
+  text-decoration: none;
+}
+
+
