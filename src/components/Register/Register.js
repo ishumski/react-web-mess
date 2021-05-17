@@ -1,5 +1,7 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signUp } from '../../store/authAction';
 import "../Login/Login.css";
 
 
@@ -11,16 +13,29 @@ function Register() {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const dispatch = useDispatch();
 
-  const handleClick = () => {
-    console.log(email, password, firstName, lastName)
+  // const handleClick = () => {
+  //   console.log(email, password, firstName, lastName)
+  // }
+
+  const registerUser = (event) => {
+    event.preventDefault();
+    const user = {
+      email: email,
+      password: password,
+      firstName: firstName,
+      lastName: lastName
+    }
+    dispatch(signUp(user));
   }
+
 
   return (
     <div className="register">
       Registration
       <div className="register__form">
-        <form>
+        <form >
           <input
             type="text"
             placeholder="Enter email"
@@ -45,7 +60,7 @@ function Register() {
             value={lastName}
             onChange={(event) => setLastName(event.target.value)}
           />
-          <Button onClick={handleClick} >Sign Up</Button>
+          <Button type="submit" onClick={registerUser} >Sign Up</Button>
         </form>
       </div>
     </div>
