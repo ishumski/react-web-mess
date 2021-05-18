@@ -6,6 +6,7 @@ import Login from './components/Login/Login.js'
 import Register from './components/Register/Register.js'
 import { BrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
       <div className="App">
         <Layout />
         <Switch>
-          <Route path='/' exact component={Home} />
+          <PrivateRoute path='/' exact component={Home} />
+
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
 
