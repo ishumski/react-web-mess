@@ -1,13 +1,14 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { signUp } from '../../store/authAction';
-import "../Login/Login.css";
 
+import "../Login/Login.css";
+import { signUp } from '../../store/auth/action';
 
 
 
 function Register() {
+
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +28,14 @@ function Register() {
       firstName: firstName,
       lastName: lastName
     }
+
     dispatch(signUp(user));
+
+    //после отработки ф-ции очищаем поля
+    setEmail("");
+    setPassword("");
+    setFirstName("");
+    setLastName("");
   }
 
 
