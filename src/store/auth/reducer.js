@@ -11,7 +11,7 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-  console.log(action);
+  
   switch (action.type) {
 
     case `${authConst.USER_LOGIN}_REQUEST`:
@@ -37,6 +37,5 @@ export default (state = initialState, action) => {
       }
       break;
   }
-  console.log(action);
   return state;
 }

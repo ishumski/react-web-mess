@@ -1,12 +1,19 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Redirect, Route } from 'react-router';
 
 
-function PrivateRoute({ path, component, exact }) {
+const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
 
-    <Route path={path} exact={exact} component={component} />
+    <Route {...rest} component={(props) => {
+      const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null
 
+      if (user) {
+        return <Component {...props} />
+      } else {
+        return <Redirect to={"/register"} />
+      }
+    }} />
   )
 }
 

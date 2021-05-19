@@ -11,7 +11,7 @@ export const signUp = (user) => {
     auth
       .createUserWithEmailAndPassword(user.email, user.password)
       .then(data => {
-    
+
         const currentUser = auth.currentUser;
 
         const name = `${user.firstName} ${user.lastName}`;
@@ -48,7 +48,7 @@ export const signUp = (user) => {
                 console.log(error);
                 dispatch({
                   type: `${authConst.USER_LOGIN}_FAILURE`,
-                  payload: {error}
+                  payload: { error }
                 });
               });
           });
@@ -57,4 +57,10 @@ export const signUp = (user) => {
         console.log(error);
       })
   }
+}
+
+export const signIn = (user) => {
+return async dispatch => {
+  
+}
 }
