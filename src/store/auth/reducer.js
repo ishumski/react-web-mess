@@ -38,6 +38,19 @@ export default (state = initialState, action) => {
         error: action.payload.error
       }
       break;
+    case `${authConst.USER_LOGOUT}_REQUEST`:
+      break;
+    case `${authConst.USER_LOGOUT}_SUCCESS`:
+      state = {
+        ...initialState
+      }
+      break;
+    case `${authConst.USER_LOGOUT}_FAILURE`:
+      state = {
+        ...state,
+        error: action.payload.error
+      }
+      break;
   }
   return state;
 }

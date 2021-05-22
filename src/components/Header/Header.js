@@ -1,11 +1,14 @@
 import React from 'react';
 import './Header.css';
 import { Link, NavLink } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../store/auth/action';
 
 function Header(props) {
 
-  const auth = useSelector(state => state.auth)
+  const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+
   return (
     <div className="header">
       <div className="header__wrapper">
@@ -24,7 +27,12 @@ function Header(props) {
       <div>{`${auth.firstName} ${auth.lastName}`}</div>
       <div className="header__logout">
         {auth.authenticated ? (
-          <Link to={'#'} onClick={props.logout}>Logout</Link>
+          <Link to={'#'} onClick={() => {
+            dispatch(logout())
+          }}
+          >
+            Logout
+          </Link>
         ) : null
         }
 

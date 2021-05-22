@@ -121,3 +121,28 @@ export const isLoggedInUser = () => {
     }
   }
 }
+
+export const logout = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: `${authConst.USER_LOGOUT}_REQUEST`
+    });
+    auth
+      .signOut()
+      .then(() => {
+        localStorage.clear();
+        dispatch({
+          type: `${authConst.USER_LOGOUT}_SUCCESS`
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        dispatch({
+          type: `${authConst.USER_LOGOUT}_FAILURE`,
+          payload: {
+            error
+          }
+        });
+      })
+  }
+}
