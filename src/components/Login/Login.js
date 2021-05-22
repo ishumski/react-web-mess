@@ -1,14 +1,53 @@
 import { Button } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
+import { isLoggedInUser, signIn } from '../../store/auth/action';
 import './Login.css';
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
-  const handleClick = () => {
+  /* useSelector это аналог mapStateToProps . 
+  Хук принимает на вход селектор - метод, 
+  который принимает redux state
+  и возвращает из него необходимые данные.*/
+  const auth = useSelector(state => state.auth);
+  console.log(auth.authenticated);
+
+  /*useEffect представляет собой совокупность методов 
+  componentDidMount, componentDidUpdate, и componentWillUnmount
+  жизненный цикл React*/
+  // useEffect(() => {
+  //   if (!auth.authenticated) {
+  //     dispatch(isLoggedInUser())
+  //   }
+  // }, [])
+
+
+  const userLogin = (event) => {
+    event.preventDefault();
+
+    if (email === "") {
+      alert("Email is required");
+      return
+    }
+
+    if (password === "") {
+      alert("Password is required");
+      return
+    }
+    dispatch(signIn({ email, password }))
+
     console.log(email, password);
   }
+
+  if (auth.authenticated) {
+    return <Redirect to={'/'} />
+  }
+
   return (
     <div className="login">
       Login
@@ -26,7 +65,7 @@ function Login() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-          <Button onClick={handleClick} >Sign In</Button>
+          <Button type="submit" onClick={userLogin} >Sign In</Button>
         </form>
       </div>
     </div>

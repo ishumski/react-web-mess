@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router';
 import './App.css';
 import Home from './components/Home/Home.js'
@@ -7,9 +7,21 @@ import Register from './components/Register/Register.js'
 import { BrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import { useDispatch, useSelector } from 'react-redux';
+import { isLoggedInUser } from './store/auth/action';
 
 
 function App() {
+
+  const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth)
+
+  useEffect(() => {
+    if (!auth.authenticated) {
+      dispatch(isLoggedInUser())
+    }
+  }, [])
+
   return (
     <BrowserRouter>
       <div className="App">

@@ -5,8 +5,6 @@ import { useDispatch } from 'react-redux';
 import "../Login/Login.css";
 import { signUp } from '../../store/auth/action';
 
-
-
 function Register() {
 
 

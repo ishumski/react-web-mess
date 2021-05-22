@@ -2,16 +2,18 @@ import { authConst } from './types';
 
 //создаём объект началльного состояния нашей аутентификации
 const initialState = {
-  firstName: "",
-  lastName: "",
-  email: "",
+  firstName: '',
+  lastName: '',
+  email: '',
   authenticating: false,
   authenticated: false,
-  error: null,
+  error: null
 }
 
 export default (state = initialState, action) => {
-  
+
+  console.log(action);
+
   switch (action.type) {
 
     case `${authConst.USER_LOGIN}_REQUEST`:
@@ -20,7 +22,7 @@ export default (state = initialState, action) => {
         authenticating: true
       }
       break;
-    case `${authConst.USER_LOGIN}_SUCCEESS`:
+    case `${authConst.USER_LOGIN}_SUCCESS`:
       state = {
         ...state,
         ...action.payload.user,
@@ -33,7 +35,7 @@ export default (state = initialState, action) => {
         ...state,
         authenticated: false,
         authenticating: false,
-        error: action.payload.error,
+        error: action.payload.error
       }
       break;
   }

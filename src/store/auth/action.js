@@ -60,7 +60,64 @@ export const signUp = (user) => {
 }
 
 export const signIn = (user) => {
-return async dispatch => {
-  
+  return async (dispatch) => {
+
+    dispatch({
+      type: `${authConst.USER_LOGIN}_REQUEST`
+    });
+
+    auth
+      .signInWithEmailAndPassword(user.email, user.password)
+      .then((data) => {
+        console.log(data);
+
+        const name = data.user.displayName.split(" ");
+        const firstName = name[0];
+        const lastName = name[1];
+
+
+        const loggedInUser = {
+          firstName,
+          lastName,
+          uid: data.user.uid,
+          email: data.user.email
+        }
+
+        localStorage.setItem('user', JSON.stringify(loggedInUser));
+
+        console.log(loggedInUser);
+        dispatch({
+          type: `${authConst.USER_LOGIN}_SUCCESS`,
+          payload: { user: loggedInUser }
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        dispatch({
+          type: `${authConst.USER_LOGIN}_FAILURE`,
+          payload: { error }
+        })
+      })
+  }
 }
+
+//при загрузке данные на странице не очищаются
+
+export const isLoggedInUser = () => {
+  return async (dispatch) => {
+
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
+    if (user) {
+      dispatch({
+        type: `${authConst.USER_LOGIN}_SUCCESS`,
+        payload: { user }
+      })
+    } else {
+      dispatch({
+        type: `${authConst.USER_LOGIN}_FAILURE`,
+        payload: { error: 'Login again please' }
+      });
+    }
+  }
 }
