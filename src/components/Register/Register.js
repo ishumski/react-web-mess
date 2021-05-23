@@ -1,9 +1,10 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import "../Login/Login.css";
 import { signUp } from '../../store/auth/action';
+import { Redirect } from 'react-router';
 
 function Register() {
 
@@ -13,6 +14,7 @@ function Register() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth);
 
   // const handleClick = () => {
   //   console.log(email, password, firstName, lastName)
@@ -36,6 +38,9 @@ function Register() {
     setLastName("");
   }
 
+  if (auth.authenticated) {
+    return <Redirect to={'/'} />
+  }
 
   return (
     <div className="register">

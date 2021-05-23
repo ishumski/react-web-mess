@@ -16,6 +16,9 @@ function App() {
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth)
 
+ /*useEffect представляет собой совокупность методов 
+  componentDidMount, componentDidUpdate, и componentWillUnmount
+  жизненный цикл React*/
   useEffect(() => {
     if (!auth.authenticated) {
       dispatch(isLoggedInUser())

@@ -28,7 +28,7 @@ function Header(props) {
       <div className="header__logout">
         {auth.authenticated ? (
           <Link to={'#'} onClick={() => {
-            dispatch(logout())
+            dispatch(logout(auth.uid))
           }}
           >
             Logout

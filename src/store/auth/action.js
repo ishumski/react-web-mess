@@ -21,12 +21,13 @@ export const signUp = (user) => {
         })
           .then(() => {
             db.collection("users")
-              // .doc(data.user.uid)
-              .add({
+              .doc(data.user.uid)
+              .set({
                 firstName: user.firstName,
                 lastName: user.lastName,
                 uid: data.user.uid,
                 createdAt: new Date(),
+                isOnline: true,
               })
               .then(() => {
                 const loggedInUser = {
@@ -122,27 +123,41 @@ export const isLoggedInUser = () => {
   }
 }
 
-export const logout = () => {
+export const logout = (uid) => {
   return async (dispatch) => {
     dispatch({
       type: `${authConst.USER_LOGOUT}_REQUEST`
     });
-    auth
-      .signOut()
+
+    db.collection('users')
+      .doc(uid)
+      .update({
+        isOnline: false,
+      })
       .then(() => {
-        localStorage.clear();
-        dispatch({
-          type: `${authConst.USER_LOGOUT}_SUCCESS`
-        });
+        auth
+          .signOut()
+          .then(() => {
+            localStorage.clear();
+            dispatch({
+              type: `${authConst.USER_LOGOUT}_SUCCESS`
+            });
+          })
+          .catch(error => {
+            console.log(error);
+            dispatch({
+              type: `${authConst.USER_LOGOUT}_FAILURE`,
+              payload: {
+                error
+              }
+            });
+          })
       })
-      .catch(error => {
-        console.log(error);
-        dispatch({
-          type: `${authConst.USER_LOGOUT}_FAILURE`,
-          payload: {
-            error
-          }
-        });
-      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+      });
+
+
+
   }
 }

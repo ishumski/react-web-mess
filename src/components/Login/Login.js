@@ -1,8 +1,8 @@
 import { Button } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
-import { isLoggedInUser, signIn } from '../../store/auth/action';
+import { signIn } from '../../store/auth/action';
 import './Login.css';
 
 function Login() {
@@ -10,22 +10,12 @@ function Login() {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
-  /* useSelector это аналог mapStateToProps . 
+  /* useSelector это аналог mapStateToProps. 
   Хук принимает на вход селектор - метод, 
   который принимает redux state
   и возвращает из него необходимые данные.*/
   const auth = useSelector(state => state.auth);
   console.log(auth.authenticated);
-
-  /*useEffect представляет собой совокупность методов 
-  componentDidMount, componentDidUpdate, и componentWillUnmount
-  жизненный цикл React*/
-  // useEffect(() => {
-  //   if (!auth.authenticated) {
-  //     dispatch(isLoggedInUser())
-  //   }
-  // }, [])
-
 
   const userLogin = (event) => {
     event.preventDefault();
@@ -72,4 +62,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Login;
