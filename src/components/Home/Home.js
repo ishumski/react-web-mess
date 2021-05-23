@@ -3,6 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getRealtimeUsers } from '../../store/user/action';
 import './Home.css';
 
+import { Avatar, IconButton, Button } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
+import MicIcon from '@material-ui/icons/Mic';
+
 function Home(props) {
 
   const dispatch = useDispatch();
@@ -22,9 +29,9 @@ function Home(props) {
           user.users.map(user => {
             return (
               <div className="displayName">
-                <div className="displayPic">
-                  <img src="https://i.pinimg.com/originals/be/ac/96/beac96b8e13d2198fd4bb1d5ef56cdcf.jpg" alt="" />
-                </div>
+
+                <Avatar />
+
                 <div className='userName'>
                   <span>{user.firstName}{user.lastName}</span>
                   <span className="isOnline">{user.isOnline ? 'online' : 'offline'}</span>
@@ -34,22 +41,43 @@ function Home(props) {
           })
         ) : null
         }
-
-
-
       </div>
-      <div className="chatArea">
-        <div className="chatHeader">{user.firstName}{user.lastName}</div>
-        <div className="messageSections">
 
-          <div style={{ textAlign: 'left' }}>
-            <p className="messageStyle" >Hello User</p>
+      <div className="chat">
+        <div className="chat__header">
+          <Avatar />
+          <div className="chat__header_info">
+            <span>{auth.firstName}{auth.lastName}</span>
           </div>
-
         </div>
-        <div className="chatControls">
-          <textarea />
-          <button>Send</button>
+
+        <div className="chat__body">
+          <p className="chat__message">
+            Hello, mr. White
+            </p>
+        </div>
+
+        <div className="chat__footer">
+          <form>
+
+            <SentimentVerySatisfiedIcon />
+            <input
+              value={''}
+              onChange={() => { }}
+              type="text"
+              placeholder="Type a message"
+
+            />
+
+            <Button
+              className="chat__footer-btn"
+              type="submit"
+
+            >
+              Send a Message
+                    </Button>
+            <MicIcon />
+          </form>
         </div>
       </div>
     </div>

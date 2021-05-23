@@ -1,48 +1,19 @@
-.container{
+.container {
   display: flex;
-  position: absolute;
+  max-width: 1200px;
+  min-width: 850px;
   width: 100%;
+  margin: 0 auto;
   height: calc(100% - 60px);
   overflow: hidden;
 }
-.listOfUsers{
-  width: 30%;
-  height: 100%;
+.listOfUsers {
+  flex: 0.3;
   overflow-x: hidden;
-  border-right: 1px solid #ccc;
-}
-.chatArea{
-  width: 70%;
-  height: 100%;
-  overflow-x: hidden;
-  position: relative;
-}
-.chatHeader{
-  position: fixed;
-  width: 70%;
-  height: 40px;
-  background: #e2e0e0;
-  text-align: center;
-  line-height: 40px;
-  color: #000;
-  font-weight: bold;
-  font-family: sans-serif;
-}
-.chatControls{
-  display: flex;
-  position: fixed;
-  width: 70%;
-  height: 50px;
-  bottom: 0;
-}
-.chatControls textarea{
-  width: 90%;
-}
-.chatControls button{
-  width: 10%;
+  border: 1px solid #ccc;
 }
 
-.displayName{
+.displayName {
   display: flex;
   align-items: center;
   padding: 5px 10px;
@@ -50,37 +21,69 @@
   cursor: pointer;
 }
 
-
-.displayName.active{
+.displayName.active {
   background: #ccc;
 }
 
-.displayName .displayPic{
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
-  border-radius: 50%;
+/**********/
+.chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.displayName .displayPic img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.chat__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0px;
 }
 
-.messageStyle{
-  background: skyblue;
-  display: inline-block;
-  padding: 5px 10px;
-  border-radius: 10px;
-  margin: 5px;
-  display: inline-block;
+.chat__body {
+
+  background-image: url("https://crew.bet/wp-content/uploads/2015/07/bet-blocks-bg.png?id=1563");
+  background-position: center;
+  background-repeat: repeat;
+  overflow-y: auto;
+  padding: 30px;
 }
 
-.messageSections{
-  height: calc(100% - 90px);
-  width: 100%;
-  overflow-x: hidden;
+.chat__message {
+  width: fit-content;
   position: relative;
-  top: 40px;
+  max-width: 350px;
+  overflow-wrap: break-word;
+  background-color: #ffffff;
+  padding: 15px 25px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.chat__name {
+  position: absolute;
+  top: -15px;
+  font-size: xx-small;
+  font-weight: 800;
+}
+
+.chat__footer > form {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  padding: 0px 15px;
+  background-color: rgb(213, 217, 219);
+}
+.chat__footer > form > input {
+  flex: 1;
+  border-radius: 30px;
+  height: 40px;
+  border: none;
+  padding: 10px;
+  margin: 0px 10px;
+  outline: none;
+  font-size: 16px;
+}
+
+.chat__footer-btn {
+  display: none !important;
 }
