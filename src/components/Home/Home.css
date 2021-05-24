@@ -1,11 +1,8 @@
 .container {
   display: flex;
-  max-width: 1200px;
-  min-width: 850px;
   width: 100%;
-  margin: 0 auto;
-  height: calc(100% - 60px);
-  overflow: hidden;
+  /* height: calc(100% - 60px);
+  overflow: hidden; */
 }
 .listOfUsers {
   flex: 0.3;
@@ -40,7 +37,7 @@
 }
 
 .chat__body {
-
+  height: calc(100vh - 180px);
   background-image: url("https://crew.bet/wp-content/uploads/2015/07/bet-blocks-bg.png?id=1563");
   background-position: center;
   background-repeat: repeat;

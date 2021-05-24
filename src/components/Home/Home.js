@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRealtimeUsers } from '../../store/user/action';
 import './Home.css';
 
-import { Avatar, IconButton, Button } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import AttachFileIcon from '@material-ui/icons/AttachFile';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { Avatar, Button } from '@material-ui/core';
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
 import MicIcon from '@material-ui/icons/Mic';
 
@@ -16,10 +13,32 @@ function Home(props) {
 
   const auth = useSelector(store => store.auth);
   const user = useSelector(store => store.user);
+  const [input, setInput] = useState('');
+  let unsubscribe;
+
 
   useEffect(() => {
-    dispatch(getRealtimeUsers(auth.uid));
+    unsubscribe = dispatch(getRealtimeUsers(auth.uid))
+      .then(unsubscribe => {
+        return unsubscribe;
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }, []);
+
+  useEffect(() => {
+    return () => {
+      unsubscribe.then(unsub => unsub()).catch(error => console.log(error))
+    }
+  }, []);
+
+  const sendMessage = (event) => {
+    event.preventDefault();
+    console.log(input);
+    setInput('')
+
+  }
 
   return (
     <div className="container">
@@ -28,7 +47,7 @@ function Home(props) {
         {(user.users.length > 0) ? (
           user.users.map(user => {
             return (
-              <div className="displayName">
+              <div key={user.uid} className="displayName">
 
                 <Avatar />
 
@@ -62,8 +81,8 @@ function Home(props) {
 
             <SentimentVerySatisfiedIcon />
             <input
-              value={''}
-              onChange={() => { }}
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
               type="text"
               placeholder="Type a message"
 
@@ -72,7 +91,7 @@ function Home(props) {
             <Button
               className="chat__footer-btn"
               type="submit"
-
+              onClick={sendMessage}
             >
               Send a Message
                     </Button>
