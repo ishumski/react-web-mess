@@ -31,6 +31,7 @@
 
 .chat__header {
   display: flex;
+  height: 69px;
   align-items: center;
   justify-content: center;
   padding: 15px 0px;

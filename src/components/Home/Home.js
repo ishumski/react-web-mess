@@ -7,13 +7,38 @@ import { Avatar, Button } from '@material-ui/core';
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
 import MicIcon from '@material-ui/icons/Mic';
 
+
+
+
+const User = (props) => {
+  const { user, onClick } = props;
+  return (
+    <div
+      onClick={() => onClick(user)}
+      key={user.uid}
+      className="displayName"
+    >
+
+      <Avatar />
+
+      <div className='userName'>
+        <span>{user.firstName}{user.lastName}</span>
+        <span className="isOnline">{user.isOnline ? 'online' : 'offline'}</span>
+      </div>
+    </div>
+  )
+}
+
+
 function Home(props) {
 
   const dispatch = useDispatch();
 
-  const auth = useSelector(store => store.auth);
-  const user = useSelector(store => store.user);
+  const auth = useSelector(state => state.auth);
+  const user = useSelector(state => state.user);
   const [input, setInput] = useState('');
+  const [chat, setChat] = useState(false);
+  const [chatUser, setChatUser] = useState('');
   let unsubscribe;
 
 
@@ -27,11 +52,19 @@ function Home(props) {
       })
   }, []);
 
+  //componentWillUnmount
   useEffect(() => {
+    //cleanup
     return () => {
       unsubscribe.then(unsub => unsub()).catch(error => console.log(error))
     }
   }, []);
+
+  const initChat = (user) => {
+    setChat(true);
+    setChatUser(`${user.firstName} ${user.lastName}`)
+    console.log(user)
+  }
 
   const sendMessage = (event) => {
     event.preventDefault();
@@ -40,40 +73,41 @@ function Home(props) {
 
   }
 
+
   return (
     <div className="container">
       <div className="listOfUsers">
 
-        {(user.users.length > 0) ? (
+        {user.users.length > 0 ?
           user.users.map(user => {
             return (
-              <div key={user.uid} className="displayName">
-
-                <Avatar />
-
-                <div className='userName'>
-                  <span>{user.firstName}{user.lastName}</span>
-                  <span className="isOnline">{user.isOnline ? 'online' : 'offline'}</span>
-                </div>
-              </div>
-            )
-          })
-        ) : null
+              <User
+                key={user.uid}
+                user={user}
+                onClick={initChat}
+              />
+            );
+          }) : null
         }
       </div>
 
       <div className="chat">
         <div className="chat__header">
-          <Avatar />
           <div className="chat__header_info">
-            <span>{auth.firstName}{auth.lastName}</span>
+            {chat ? chatUser : ('')}
           </div>
+
+
+
         </div>
 
         <div className="chat__body">
-          <p className="chat__message">
-            Hello, mr. White
+          {chat ?
+            <p className="chat__message">
+              Hello, mr. White
             </p>
+            : null}
+
         </div>
 
         <div className="chat__footer">
