@@ -2,6 +2,7 @@ import { userConst } from './types';
 
 const initialState = {
   users: [],
+  chats: []
 }
 
 export default (state = initialState, action) => {
@@ -22,6 +23,12 @@ export default (state = initialState, action) => {
       state = {
         ...state,
         error: action.payload.error,
+      }
+      break;
+    case userConst.GET_REALTIME_MESSAGES:
+      state = {
+        ...state,
+        chats: action.payload.chats
       }
       break;
   }

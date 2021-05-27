@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRealtimeUsers } from '../../store/user/action';
+import { getRealtimeChats, getRealtimeUsers, updateMessage } from '../../store/user/action';
 import './Home.css';
 
 import { Avatar, Button } from '@material-ui/core';
@@ -36,9 +36,15 @@ function Home(props) {
 
   const auth = useSelector(state => state.auth);
   const user = useSelector(state => state.user);
-  const [input, setInput] = useState('');
-  const [chat, setChat] = useState(false);
+
+  const [chatStarted, setChatStarted] = useState(false);
+
   const [chatUser, setChatUser] = useState('');
+
+  const [message, setMessage] = useState('');
+
+  const [userUid, setUserUid] = useState(null);
+
   let unsubscribe;
 
 
@@ -61,16 +67,32 @@ function Home(props) {
   }, []);
 
   const initChat = (user) => {
-    setChat(true);
-    setChatUser(`${user.firstName} ${user.lastName}`)
-    console.log(user)
+    setChatStarted(true);
+    setChatUser(`${user.firstName} ${user.lastName}`);
+    setUserUid(user.uid);
+
+    dispatch(getRealtimeChats({
+      uid_1: auth.uid,
+      uid_2: user.uid
+    }))
   }
+
 
   const sendMessage = (event) => {
     event.preventDefault();
-    console.log(input);
-    setInput('')
 
+    const messageObj = {
+      user_uid_1: auth.uid,
+      user_uid_2: userUid,
+      message,
+    }
+
+    if (message !== '') {
+      dispatch(updateMessage(messageObj))
+        .then(() => {
+          setMessage('')
+        });
+    }
   }
 
 
@@ -94,19 +116,21 @@ function Home(props) {
       <div className="chat">
         <div className="chat__header">
           <div className="chat__header_info">
-            {chat ? chatUser : ('')}
+            {chatStarted ? chatUser : ('')}
           </div>
-
-
 
         </div>
 
         <div className="chat__body">
-          {chat ?
-            <p className="chat__message">
-              Hello, mr. White
-            </p>
-            : null}
+          {
+            chatStarted ?
+              user.chats.map(chat =>
+                <p
+                  key={chat.createdAt}
+                  className="chat__message">
+                  {chat.message}
+                </p>
+              ) : null}
 
         </div>
 
@@ -115,8 +139,8 @@ function Home(props) {
 
             <SentimentVerySatisfiedIcon />
             <input
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
               type="text"
               placeholder="Type a message"
 
@@ -137,4 +161,4 @@ function Home(props) {
   )
 }
 
-export default Home
+export default Home;
