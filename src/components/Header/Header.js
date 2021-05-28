@@ -8,6 +8,7 @@ function Header(props) {
 
   const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
+  console.log(props)
 
   return (
     <div className="header">
@@ -17,7 +18,7 @@ function Header(props) {
         {
           (!auth.authenticated) ? (
             <div className="header__nav">
-              <NavLink to={'/login'} >Login</NavLink>
+              <NavLink to={'/login'} onClick={() => props.handleOpen}>Login</NavLink>
               <NavLink to={'/register'} >Sign up</NavLink>
             </div>
           ) : null

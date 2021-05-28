@@ -1,5 +1,5 @@
-import React from 'react'
-import Header from '../Header/Header'
+import React from 'react';
+import Header from '../Header/Header';
 
 function Layout(props) {
   return (
@@ -10,4 +10,4 @@ function Layout(props) {
   )
 }
 
-export default Layout
+export default Layout;
