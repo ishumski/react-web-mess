@@ -70,7 +70,6 @@ export const signIn = (user) => {
     auth
       .signInWithEmailAndPassword(user.email, user.password)
       .then((data) => {
-        console.log(data);
 
         db.collection('users')
           .doc(data.user.uid)
@@ -102,7 +101,7 @@ export const signIn = (user) => {
           })
       })
       .catch(error => {
-        console.log(error);
+        alert(error);
         dispatch({
           type: `${authConst.USER_LOGIN}_FAILURE`,
           payload: { error }

@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button, Input } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -43,29 +43,29 @@ function Register() {
   }
 
   return (
+    
     <div className="register">
-      Registration
       <div className="register__form">
         <form >
-          <input
+          <Input
             type="text"
             placeholder="Enter email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
-          <input
+          <Input
             type="password"
             placeholder="Enter password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-          <input
+          <Input
             type="text"
             placeholder="Enter name"
             value={firstName}
             onChange={(event) => setFirstName(event.target.value)}
           />
-          <input
+          <Input
             type="text"
             placeholder="Enter second name"
             value={lastName}

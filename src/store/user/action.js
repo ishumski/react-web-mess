@@ -18,7 +18,6 @@ export const getRealtimeUsers = (uid) => {
             users.push(doc.data());
           }
         });
-        // console.log(users);
 
         dispatch({
           type: `${userConst.GET_REALTIME_USERS}_SUCCESS`,
@@ -37,10 +36,7 @@ export const updateMessage = (messageObj) => {
       createdAt: new Date()
     })
       .then((data) => {
-        console.log(data)
-        // dispatch({
-        //   type: 
-        // })
+        console.log(data);
       })
       .catch((error) => {
         console.log(error)
@@ -73,14 +69,7 @@ export const getRealtimeChats = (user) => {
           type: userConst.GET_REALTIME_MESSAGES,
           payload: { chats }
         })
-        console.log(chats)
-        // if (chats.length > 0) {
-        //   
-        // } else (
-        //   dispatch({
-        //     type: `${userConst.GET_REALTIME_MESSAGES}_FAILURE`,
-        //     payload: { chats }
-        //   })
+        console.log(chats);
       })
   }
 }

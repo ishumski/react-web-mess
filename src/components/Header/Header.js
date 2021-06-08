@@ -8,20 +8,18 @@ function Header(props) {
 
   const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
-  console.log(props)
 
   return (
     <div className="header">
       <div className="header__wrapper">
         <div className="header__logo">REACT MESSENGER</div>
 
-        {
-          (!auth.authenticated) ? (
-            <div className="header__nav">
-              <NavLink to={'/login'} onClick={() => props.handleOpen}>Login</NavLink>
-              <NavLink to={'/register'} >Sign up</NavLink>
-            </div>
-          ) : null
+        {!auth.authenticated ? (
+          <div className="header__nav">
+            <NavLink to={'/login'} >Login</NavLink>
+            <NavLink to={'/register'} >Sign up</NavLink>
+          </div>
+        ) : null
         }
 
       </div>

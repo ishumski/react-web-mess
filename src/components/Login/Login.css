@@ -1,4 +1,4 @@
-/* .login,
+.login,
 .register {
   display: flex;
   flex-direction: column;
@@ -28,4 +28,4 @@
 .register__form > form > input {
   height: 25px;
   margin-bottom: 10px;
-} */
+}

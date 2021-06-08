@@ -22,6 +22,7 @@ export default (state = initialState, action) => {
         authenticating: true
       }
       break;
+
     case `${authConst.USER_LOGIN}_SUCCESS`:
       state = {
         ...state,
@@ -30,6 +31,7 @@ export default (state = initialState, action) => {
         authenticating: false
       }
       break;
+
     case `${authConst.USER_LOGIN}_FAILURE`:
       state = {
         ...state,
@@ -38,13 +40,16 @@ export default (state = initialState, action) => {
         error: action.payload.error
       }
       break;
+
     case `${authConst.USER_LOGOUT}_REQUEST`:
       break;
+
     case `${authConst.USER_LOGOUT}_SUCCESS`:
       state = {
         ...initialState
       }
       break;
+      
     case `${authConst.USER_LOGOUT}_FAILURE`:
       state = {
         ...state,
