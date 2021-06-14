@@ -2,35 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRealtimeChats, getRealtimeUsers, updateMessage } from '../../store/user/action';
 import './Home.css';
-
-import { Avatar, Button } from '@material-ui/core';
+import User from './User/User';
+import { Button } from '@material-ui/core';
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
 import MicIcon from '@material-ui/icons/Mic';
 
-
-
-
-const User = (props) => {
-  const { user, onClick } = props;
-  return (
-    <div
-      onClick={() => onClick(user)}
-      key={user.uid}
-      className="displayName"
-    >
-
-      <Avatar />
-
-      <div className='userName'>
-        <span>{user.firstName}{user.lastName}</span>
-        <span className="isOnline">{user.isOnline ? 'online' : 'offline'}</span>
-      </div>
-    </div>
-  )
-}
-
-
-function Home(props) {
+function Home() {
 
   const dispatch = useDispatch();
 
@@ -95,7 +72,6 @@ function Home(props) {
     }
   }
 
-
   return (
     <div className="container">
       <div className="listOfUsers">
@@ -103,6 +79,7 @@ function Home(props) {
         {user.users.length > 0 ?
           user.users.map(user => {
             return (
+
               <User
                 key={user.uid}
                 user={user}
@@ -116,7 +93,9 @@ function Home(props) {
       <div className="chat">
         <div className="chat__header">
           <div className="chat__header_info">
-            {chatStarted ? chatUser : ('')}
+            {
+              chatStarted ? chatUser : ('')
+            }
           </div>
 
         </div>
@@ -125,12 +104,15 @@ function Home(props) {
           {
             chatStarted ?
               user.chats.map(chat =>
-                <p
+                <div
                   key={chat.createdAt}
-                  className="chat__message">
-                  {chat.message}
-                </p>
-              ) : null}
+                  style={{ textAlign: chat.user_uid_1 === auth.uid ? 'right' : 'left' }}
+                >
+                  <p className="chat__message">
+                    {chat.message}
+                  </p>
+                </div>
+              ) : <span className='chat__choose_message'>Выберите, кому хотели бы написать</span>}
 
         </div>
 
@@ -152,7 +134,7 @@ function Home(props) {
               onClick={sendMessage}
             >
               Send a Message
-                    </Button>
+            </Button>
             <MicIcon />
           </form>
         </div>

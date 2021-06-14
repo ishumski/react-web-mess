@@ -19,6 +19,9 @@
 .header__nav a{
   text-decoration: none;
   margin-right: 15px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  padding: 5px 10px;
 }
 .header__wrapper{
   display: flex; 
