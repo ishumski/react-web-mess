@@ -6,6 +6,7 @@ import User from './User/User';
 import { Button } from '@material-ui/core';
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
 import MicIcon from '@material-ui/icons/Mic';
+import ReactScrollableFeed from 'react-scrollable-feed';
 
 function Home() {
 
@@ -100,21 +101,25 @@ function Home() {
 
         </div>
 
-        <div className="chat__body">
-          {
-            chatStarted ?
-              user.chats.map(chat =>
-                <div
-                  key={chat.createdAt}
-                  style={{ textAlign: chat.user_uid_1 === auth.uid ? 'right' : 'left' }}
-                >
-                  <p className="chat__message">
-                    {chat.message}
-                  </p>
-                </div>
-              ) : <span className='chat__choose_message'>Выберите, кому хотели бы написать</span>}
+        <div className="chat__body" >
+          <ReactScrollableFeed>
+            {
+              chatStarted ?
+                user.chats.map(chat =>
+                  <div
+                    key={chat.createdAt}
+                    style={{ textAlign: chat.user_uid_1 === auth.uid ? 'left' : 'right' }}
+                  >
+                    <p className="chat__message">
+                      {chat.message}
+                    </p>
+                  </div>
+                ) : <span className='chat__choose_message'>Выберите, кому хотели бы написать</span>
+            }
+          </ReactScrollableFeed>
 
         </div>
+
 
         <div className="chat__footer">
           <form>
