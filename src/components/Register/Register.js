@@ -1,24 +1,22 @@
-import { Button, Input } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import "../Login/Login.css";
-import { signUp } from '../../store/auth/action';
 import { Redirect } from 'react-router';
 
-function Register() {
+import { Button, Input } from '@material-ui/core';
 
+import "../Login/Login.css";
+
+import { signUp } from '../../store/auth/action';
+
+function Register() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth);
-
-  // const handleClick = () => {
-  //   console.log(email, password, firstName, lastName)
-  // }
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -31,7 +29,6 @@ function Register() {
 
     dispatch(signUp(user));
 
-    //после отработки ф-ции очищаем поля
     setEmail("");
     setPassword("");
     setFirstName("");
@@ -78,4 +75,4 @@ function Register() {
   )
 }
 
-export default Register
+export default Register;

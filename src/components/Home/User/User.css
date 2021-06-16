@@ -2,32 +2,27 @@
   display: flex;
   align-items: center;
   padding: 10px 10px;
-
   box-sizing: border-box;
   cursor: pointer;
 }
 .displayName:hover {
   background-color: rgb(241, 241, 241);
 }
-
 .displayName.active {
   background: #ccc;
 }
-
 .userName {
   width: 100%;
   display: flex;
   justify-content: space-between;
   margin-left: 15px;
 }
-
 .userStatus{
   margin-right: 25px;
 }
 .isOnline{
   color: lightskyblue;
 }
-
 .isOffline{
   color: rgb(175, 175, 175);
 }

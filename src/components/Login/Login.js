@@ -1,22 +1,18 @@
-import { Button, Input } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
-import { signIn } from '../../store/auth/action';
+
+import { Button, Input } from '@material-ui/core';
+
 import './Login.css';
 
-
+import { signIn } from '../../store/auth/action';
 
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-
-  /* useSelector это аналог mapStateToProps. 
-  Хук принимает на вход селектор - метод, 
-  который принимает redux state
-  и возвращает из него необходимые данные.*/
   const auth = useSelector(state => state.auth);
 
   const userLogin = (event) => {
@@ -33,8 +29,6 @@ function Login(props) {
     }
 
     dispatch(signIn({ email, password }))
-
-    console.log(email, password);
   }
 
   if (auth.authenticated) {
@@ -60,7 +54,6 @@ function Login(props) {
           <Button type="submit" onClick={userLogin} >Sign In</Button>
         </form>
       </div>
-
     </div>
   )
 }

@@ -1,5 +1,5 @@
-import db, { auth } from '../../firebase';
 import { authConst } from './types';
+import db, { auth } from '../../firebase';
 
 export const signUp = (user) => {
   return async (dispatch) => {
@@ -37,7 +37,7 @@ export const signUp = (user) => {
                   email: user.email,
                 }
                 localStorage.setItem("user", JSON.stringify(loggedInUser));
-                console.log("User is logged");
+                
                 dispatch({
                   type: `${authConst.USER_LOGIN}_SUCCESS`,
                   payload: {
@@ -46,7 +46,7 @@ export const signUp = (user) => {
                 })
               })
               .catch(error => {
-                console.log(error);
+                alert(error);
                 dispatch({
                   type: `${authConst.USER_LOGIN}_FAILURE`,
                   payload: { error }
@@ -55,7 +55,7 @@ export const signUp = (user) => {
           });
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       })
   }
 }
@@ -90,14 +90,13 @@ export const signIn = (user) => {
 
             localStorage.setItem('user', JSON.stringify(loggedInUser));
 
-            console.log(loggedInUser);
             dispatch({
               type: `${authConst.USER_LOGIN}_SUCCESS`,
               payload: { user: loggedInUser }
             });
           })
           .catch(error => {
-            console.log(error);
+            alert(error);
           })
       })
       .catch(error => {
@@ -109,8 +108,6 @@ export const signIn = (user) => {
       })
   }
 }
-
-//при загрузке данные на странице не очищаются
 
 export const isLoggedInUser = () => {
   return async (dispatch) => {
@@ -152,20 +149,15 @@ export const logout = (uid) => {
             });
           })
           .catch(error => {
-            console.log(error);
+            alert(error);
             dispatch({
               type: `${authConst.USER_LOGOUT}_FAILURE`,
-              payload: {
-                error
-              }
+              payload: { error }
             });
           })
       })
       .catch((error) => {
         console.error("Error writing document: ", error);
       });
-
-
-
   }
 }

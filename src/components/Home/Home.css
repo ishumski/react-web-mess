@@ -8,14 +8,11 @@
   border-right: 1px solid rgb(233, 233, 233);
   overflow-x: auto;
 }
-
-/**********/
 .chat {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
-
 .chat__choose_message {
   position: absolute;
   top: 50%;
@@ -26,7 +23,6 @@
   border-radius: 50px;
   background-color: rgba(128, 128, 128, 0.4);
 }
-
 .chat__header {
   display: flex;
   height: 69px;
@@ -34,7 +30,6 @@
   justify-content: center;
   padding: 15px 0px;
 }
-
 .chat__body {
   height: calc(100vh - 180px);
   flex-grow: 1;
@@ -44,11 +39,9 @@
   overflow-y: auto;
   padding-left: 70px;
 }
-
 ::-webkit-scrollbar {
   display: none;
 }
-
 .chat__message {
   display: inline-block;
   padding: 15px 25px;
@@ -59,14 +52,12 @@
   border-radius: 20px;
   overflow-wrap: break-word;
 }
-
 .chat__name {
   position: absolute;
   top: -15px;
   font-size: xx-small;
   font-weight: 800;
 }
-
 .chat__footer > form {
   display: flex;
   align-items: center;
@@ -84,7 +75,6 @@
   outline: none;
   font-size: 16px;
 }
-
 .chat__footer-btn {
   display: none !important;
 }

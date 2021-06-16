@@ -25,6 +25,7 @@ export default (state = initialState, action) => {
         error: action.payload.error,
       }
       break;
+      
     case userConst.GET_REALTIME_MESSAGES:
       state = {
         ...state,

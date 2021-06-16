@@ -35,11 +35,9 @@ export const updateMessage = (messageObj) => {
       isViewed: false,
       createdAt: new Date()
     })
-      .then((data) => {
-        console.log(data);
-      })
+      .then(() => { })
       .catch((error) => {
-        console.log(error)
+        alert(error)
       })
   }
 }
@@ -69,7 +67,6 @@ export const getRealtimeChats = (user) => {
           type: userConst.GET_REALTIME_MESSAGES,
           payload: { chats }
         })
-        console.log(chats);
       })
   }
 }

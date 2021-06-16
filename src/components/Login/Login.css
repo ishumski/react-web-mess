@@ -5,7 +5,6 @@
   height: 300px;
   position: relative;
 }
-
 .login__form,
 .register__form {
   width: 100%;
@@ -17,13 +16,11 @@
   box-shadow: 0px 0px 15px 5px rgb(0 0 0 / 50%);
   padding: 25px 15px;
 }
-
 .login__form > form,
 .register__form > form {
   display: flex;
   flex-direction: column;
 }
-
 .login__form > form > input,
 .register__form > form > input {
   height: 25px;

@@ -1,6 +1,5 @@
 import { authConst } from './types';
 
-//создаём объект начального состояния нашей аутентификации
 const initialState = {
   firstName: '',
   lastName: '',
@@ -11,8 +10,6 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-
-  console.log(action);
 
   switch (action.type) {
 
